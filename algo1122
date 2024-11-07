@@ -1,0 +1,32 @@
+public class ClosestPair {
+    public static int[] findClosestPair(int[] A, int[] B) {
+        int i = 0, j = 0;
+        int minDiff = Integer.MAX_VALUE;
+        int[] result = new int[2];
+
+        while (i < A.length && j < B.length) {
+            int diff = Math.abs(A[i] - B[j]);
+            if (diff < minDiff) {
+                minDiff = diff;
+                result[0] = A[i];
+                result[1] = B[j];
+            }
+
+            // Двигаем указатель в массиве с меньшим элементом
+            if (A[i] < B[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] A = {1, 2, 10};
+        int[] B = {8, 20, 30};
+        int[] closestPair = findClosestPair(A, B);
+        System.out.println("Ближайшая пара: " + closestPair[0] + " и " + closestPair[1]);
+    }
+}
