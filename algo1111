@@ -1,0 +1,33 @@
+public class MinSubarraySum {
+    public static int findMinSubarraySum(int[] arr, int k) {
+        int n = arr.length;
+        if (n < k) {
+            System.out.println("Размер массива меньше k");
+            return -1;
+        }
+
+        // Найдем сумму первых k элементов
+        int minSum = 0;
+        for (int i = 0; i < k; i++) {
+            minSum += arr[i];
+        }
+
+        int currentSum = minSum;
+        for (int i = k; i < n; i++) {
+            currentSum += arr[i] - arr[i - k];  // Сдвигаем окно на 1 элемент вправо
+            minSum = Math.min(minSum, currentSum);  // Обновляем минимальную сумму
+        }
+
+        return minSum;
+    }
+
+    public static void main(String[] args) {
+        int[] arr1 = {10, 20, 30, 40};
+        int k1 = 2;
+        System.out.println("Минимальная сумма подмассива длины " + k1 + " : " + findMinSubarraySum(arr1, k1));
+
+        int[] arr2 = {1, 45, 2, 10, 23, 3, 1, 0, 20};
+        int k2 = 4;
+        System.out.println("Минимальная сумма подмассива длины " + k2 + " : " + findMinSubarraySum(arr2, k2));
+    }
+}
